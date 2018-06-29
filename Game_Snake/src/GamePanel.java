@@ -40,6 +40,8 @@ public class GamePanel extends JPanel implements KeyListener, Runnable{
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.white);
         g2.fillRect(0, 0, windowSize, windowSize);
+        g2.setColor(Color.red);
+        g2.drawString(String.valueOf(snake.tail+1), 0, 20);
         for ( int i = 0; i < 20; i ++ ) {
             for ( int j = 0; j < 20; j ++ ) {
                 if ( map[i][j] == 1 ) {
@@ -101,7 +103,8 @@ public class GamePanel extends JPanel implements KeyListener, Runnable{
             snake.checkEat();
             if ( ! snake.move() ) {
                 JOptionPane.showMessageDialog(null, "You fucking lose");
-                break;
+                map = new int[20][20];
+                snake = new Snake(map);
             }
             repaint();
             while ( System.nanoTime() - beginTime < 100000000 );
